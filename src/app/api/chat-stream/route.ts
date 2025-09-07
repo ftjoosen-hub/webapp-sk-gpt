@@ -1,30 +1,31 @@
-import { GoogleGenerativeAI, Tool } from '@google/generative-ai'
+import OpenAI from 'openai'
 import { NextRequest, NextResponse } from 'next/server'
 
-// Initialize Gemini AI client
-const genAI = new GoogleGenerativeAI(process.env.GEMINI_API_KEY || '')
+// Initialize OpenAI client
+const openai = new OpenAI({
+  apiKey: process.env.OPENAI_API_KEY || ''
+})
 
-// Helper function to convert base64 to buffer
-function base64ToBuffer(base64: string): Buffer {
-  const base64Data = base64.replace(/^data:image\/\w+;base64,/, '')
-  return Buffer.from(base64Data, 'base64')
-}
-
-// Google Search tool configuratie
-const googleSearchTool = {
-  googleSearch: {}
+// Helper function to convert base64 to OpenAI image format
+function base64ToOpenAIImage(base64: string) {
+  return {
+    type: "image_url" as const,
+    image_url: {
+      url: base64
+    }
+  }
 }
 
 export async function POST(request: NextRequest) {
   try {
     // Check API key
-    if (!process.env.GEMINI_API_KEY) {
-      console.error('GEMINI_API_KEY not found in environment variables')
+    if (!process.env.OPENAI_API_KEY) {
+      console.error('OPENAI_API_KEY not found in environment variables')
       return NextResponse.json(
         { 
           error: 'API configuratie ontbreekt. Check Environment Variables.',
-          hint: 'Voeg GEMINI_API_KEY toe aan je environment variables',
-          debug: 'Environment variable GEMINI_API_KEY is not set'
+          hint: 'Voeg OPENAI_API_KEY toe aan je environment variables',
+          debug: 'Environment variable OPENAI_API_KEY is not set'
         }, 
         { status: 500 }
       )
@@ -34,7 +35,7 @@ export async function POST(request: NextRequest) {
     const body = await request.json()
     console.log('Received request body:', body)
     
-    const { message, image, images, useGrounding = true, aiModel = 'smart' } = body
+    const { message, image, images } = body
 
     if (!message) {
       return NextResponse.json(
@@ -51,85 +52,56 @@ export async function POST(request: NextRequest) {
       )
     }
 
-    // Selecteer het juiste model op basis van aiModel
-    const modelName = aiModel === 'pro' ? 'gemini-2.5-pro-preview-06-05' :
-                     aiModel === 'smart' ? 'gemini-2.5-flash-preview-05-20' :
-                     'gemini-2.0-flash-exp' // internet
-    const model = genAI.getGenerativeModel({ model: modelName })
+    // Prepare messages array for OpenAI
+    const messages: any[] = []
+    
+    // Create user message with text and images
+    const userMessage: any = {
+      role: 'user',
+      content: []
+    }
 
-    // Configureer tools array - grounding alleen voor Gemini 2.0 (internet model)
-    const tools = (aiModel === 'internet' && useGrounding) ? [googleSearchTool] : []
+    // Add text content
+    userMessage.content.push({
+      type: 'text',
+      text: message
+    })
+
+    // Add images if provided
+    if (images && images.length > 0) {
+      // Multiple images
+      images.forEach((imageData: string) => {
+        userMessage.content.push(base64ToOpenAIImage(imageData))
+      })
+    } else if (image) {
+      // Single image (backward compatibility)
+      userMessage.content.push(base64ToOpenAIImage(image))
+    }
+
+    messages.push(userMessage)
 
     // Create streaming response
     const stream = new ReadableStream({
       async start(controller) {
         try {
-          let result;
-          
-          // Helper function to generate content with fallback
-          const generateStreamWithFallback = async (requestConfig: any) => {
-            try {
-              return await model.generateContentStream(requestConfig)
-            } catch (error: any) {
-              // If grounding fails, retry without tools
-              if (useGrounding && (error.message?.includes('Search Grounding is not supported') || 
-                                  error.message?.includes('google_search_retrieval is not supported'))) {
-                console.log('Grounding not supported, retrying streaming without grounding...')
-                const { tools, ...configWithoutTools } = requestConfig
-                return await model.generateContentStream(configWithoutTools)
-              }
-              throw error
-            }
-          }
-          
-          if (images && images.length > 0) {
-            // Multiple images - use new images array
-            const imageParts = images.map((imageData: string) => {
-              const imageBuffer = base64ToBuffer(imageData)
-              return {
-                inlineData: {
-                  data: imageBuffer.toString('base64'),
-                  mimeType: 'image/jpeg'
-                }
-              }
-            })
-            
-            result = await generateStreamWithFallback({
-              contents: [{ role: 'user', parts: [{ text: message }, ...imageParts] }],
-              tools: tools
-            })
-          } else if (image) {
-            // Backward compatibility - single image (legacy)
-            const imageBuffer = base64ToBuffer(image)
-            
-            const imagePart = {
-              inlineData: {
-                data: imageBuffer.toString('base64'),
-                mimeType: 'image/jpeg'
-              }
-            }
-            
-            result = await generateStreamWithFallback({
-              contents: [{ role: 'user', parts: [{ text: message }, imagePart] }],
-              tools: tools
-            })
-          } else {
-            // Text only
-            result = await generateStreamWithFallback({
-              contents: [{ role: 'user', parts: [{ text: message }] }],
-              tools: tools
-            })
-          }
+          // Create OpenAI streaming completion using gpt-4o
+          const completion = await openai.chat.completions.create({
+            model: 'gpt-4o',
+            messages: messages,
+            max_tokens: 4000,
+            temperature: 0.7,
+            stream: true
+          })
 
           // Stream the response token by token
-          for await (const chunk of result.stream) {
-            const chunkText = chunk.text()
+          for await (const chunk of completion) {
+            const content = chunk.choices[0]?.delta?.content
             
-            if (chunkText) {
+            if (content) {
               // Check if controller is still open before sending
               try {
                 const data = JSON.stringify({ 
-                  token: chunkText,
+                  token: content,
                   timestamp: new Date().toISOString()
                 })
                 
@@ -198,4 +170,4 @@ export async function POST(request: NextRequest) {
       { status: 500 }
     )
   }
-} 
+}

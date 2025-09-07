@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react'
 import { Document, Paragraph, TextRun } from 'docx'
-import GeminiTTS, { GEMINI_VOICES, EMOTION_STYLES } from './GeminiTTS'
+import OpenAITTS, { OPENAI_VOICES } from './OpenAITTS'
 
 interface ResponseActionsProps {
   content: string
@@ -27,10 +27,9 @@ export default function ResponseActions({
   const [showSpeedControl, setShowSpeedControl] = useState(false)
   const [ttsAttempts, setTtsAttempts] = useState(0)
   const [ttsTimeoutId, setTtsTimeoutId] = useState<NodeJS.Timeout | null>(null)
-  const [useGeminiTTS, setUseGeminiTTS] = useState(false) // Default to Microsoft TTS
+  const [useOpenAITTS, setUseOpenAITTS] = useState(true) // Default to OpenAI TTS
   const [showUniversalSettings, setShowUniversalSettings] = useState(false) // Universal settings dropdown
-  const [selectedGeminiVoice, setSelectedGeminiVoice] = useState(GEMINI_VOICES[3]) // Kore as default
-  const [selectedGeminiEmotion, setSelectedGeminiEmotion] = useState(EMOTION_STYLES[0]) // Neutraal as default
+  const [selectedOpenAIVoice, setSelectedOpenAIVoice] = useState(OPENAI_VOICES[0]) // Alloy as default
   
   // Use ref to track speech state without causing re-renders
   const speechActiveRef = useRef(false)
@@ -780,14 +779,13 @@ export default function ResponseActions({
     <div className={`mt-3 ${className}`}>
       {/* Single Row with All Actions */}
       <div className="flex items-center justify-end space-x-2 relative">
-        {/* Conditional TTS Component or Classic TTS */}
-        {useGeminiTTS ? (
-          <GeminiTTS
+        {/* Conditional TTS Component or Classic Microsoft TTS */}
+        {useOpenAITTS ? (
+          <OpenAITTS
             content={content}
             isMarkdown={isMarkdown}
             isStreaming={isStreaming}
-            selectedVoice={selectedGeminiVoice}
-            selectedEmotion={selectedGeminiEmotion}
+            selectedVoice={selectedOpenAIVoice}
             hideSettings={true}
             className=""
           />
@@ -857,15 +855,15 @@ export default function ResponseActions({
 
       {/* Universal Settings Dropdown */}
       {showUniversalSettings && (
-        <div className="absolute z-20 mt-2 right-0 w-96 p-4 bg-white border border-gray-200 rounded-lg shadow-xl space-y-4">
+        <div className="absolute z-20 mt-2 right-0 w-80 p-4 bg-white border border-gray-200 rounded-lg shadow-xl space-y-4">
           {/* TTS Engine Selection */}
           <div>
             <label className="block text-gray-700 text-sm font-medium mb-2">🎙️ TTS Engine</label>
             <div className="flex space-x-2">
               <button
-                onClick={() => setUseGeminiTTS(false)}
+                onClick={() => setUseOpenAITTS(false)}
                 className={`flex-1 px-3 py-2 text-sm rounded-lg transition-all duration-200 ${
-                  !useGeminiTTS
+                  !useOpenAITTS
                     ? 'bg-blue-600 text-white'
                     : 'bg-gray-100 text-gray-700 hover:bg-blue-100 border border-gray-200'
                 }`}
@@ -873,20 +871,20 @@ export default function ResponseActions({
                 🔊 Microsoft TTS
               </button>
               <button
-                onClick={() => setUseGeminiTTS(true)}
+                onClick={() => setUseOpenAITTS(true)}
                 className={`flex-1 px-3 py-2 text-sm rounded-lg transition-all duration-200 ${
-                  useGeminiTTS
+                  useOpenAITTS
                     ? 'bg-purple-600 text-white'
                     : 'bg-gray-100 text-gray-700 hover:bg-purple-100 border border-gray-200'
                 }`}
               >
-                🚀 Gemini AI TTS
+                🚀 OpenAI TTS
               </button>
             </div>
           </div>
 
           {/* Microsoft TTS Settings */}
-          {!useGeminiTTS && (
+          {!useOpenAITTS && (
             <div>
               <label className="block text-blue-700 text-sm font-medium mb-2">⚡ Spraaksnelheid</label>
               <div className="grid grid-cols-2 gap-2">
@@ -910,44 +908,25 @@ export default function ResponseActions({
             </div>
           )}
 
-          {/* Gemini TTS Settings */}
-          {useGeminiTTS && (
+          {/* OpenAI TTS Settings */}
+          {useOpenAITTS && (
             <div className="space-y-4">
               <div>
                 <label className="block text-purple-700 text-sm font-medium mb-2">🎭 Stemkeuze</label>
                 <select
-                  value={selectedGeminiVoice.name}
+                  value={selectedOpenAIVoice.name}
                   onChange={(e) => {
-                    const voice = GEMINI_VOICES.find(v => v.name === e.target.value)
-                    if (voice) setSelectedGeminiVoice(voice)
+                    const voice = OPENAI_VOICES.find(v => v.name === e.target.value)
+                    if (voice) setSelectedOpenAIVoice(voice)
                   }}
                   className="w-full p-2 border border-purple-200 rounded-lg bg-white text-purple-700"
                 >
-                  {GEMINI_VOICES.map((voice) => (
+                  {OPENAI_VOICES.map((voice) => (
                     <option key={voice.name} value={voice.name}>
-                      {voice.name} - {voice.description}
+                      {voice.description}
                     </option>
                   ))}
                 </select>
-              </div>
-
-              <div>
-                <label className="block text-purple-700 text-sm font-medium mb-2">😊 Emotie</label>
-                <div className="grid grid-cols-3 gap-2">
-                  {EMOTION_STYLES.map((emotion) => (
-                    <button
-                      key={emotion.name}
-                      onClick={() => setSelectedGeminiEmotion(emotion)}
-                      className={`px-3 py-2 text-xs rounded-lg transition-all duration-200 ${
-                        selectedGeminiEmotion.name === emotion.name
-                          ? 'bg-purple-600 text-white'
-                          : 'bg-purple-50 text-purple-700 hover:bg-purple-100 border border-purple-200'
-                      }`}
-                    >
-                      {emotion.name}
-                    </button>
-                  ))}
-                </div>
               </div>
             </div>
           )}
