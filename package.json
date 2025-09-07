@@ -1,11 +1,12 @@
 {
-  "name": "gemini-chatbot",
+  "name": "openai-chatbot",
   "version": "0.1.0",
   "private": true,
-  "description": "Een Next.js template met Gemini AI integratie, geoptimaliseerd voor Bolt + Netlify deployment",
+  "description": "Een Next.js template met OpenAI ChatGPT integratie, geoptimaliseerd voor Bolt + Netlify deployment",
   "keywords": [
     "nextjs",
-    "gemini",
+    "openai",
+    "chatgpt",
     "ai",
     "chatbot",
     "netlify",
@@ -24,12 +25,12 @@
     "node": ">=18.0.0"
   },
   "dependencies": {
-    "@google/generative-ai": "^0.21.0",
     "@netlify/plugin-nextjs": "^4.41.3",
     "docx": "^9.5.0",
     "fs": "^0.0.1-security",
     "mammoth": "^1.9.1",
     "next": "15.3.3",
+    "openai": "^4.73.1",
     "openai": "^5.19.1",
     "pdf-parse": "^1.1.1",
     "react": "^18.3.1",

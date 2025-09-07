@@ -1,26 +1,24 @@
-# 🚀 Ultimate AI Education Template - Next.js
+# 🚀 Ultimate ChatGPT Education Template - Next.js
 
-> **Een complete, professionele AI template met Gemini API, camera, multi-file upload, audio transcriptie, advanced TTS en meer!**
+> **Een complete, professionele AI template met OpenAI ChatGPT API, camera, multi-file upload, audio transcriptie, advanced TTS en meer!**
 >
 > **Gemaakt door Tom Naberink voor de onderwijssector**
 
-Een geavanceerde Next.js template die **alles** biedt wat je nodig hebt voor innovatieve AI-projecten in het onderwijs. Van simpele chatbots tot complexe multi-modal AI applicaties - dit is je startpunt!
+Een geavanceerde Next.js template die **alles** biedt wat je nodig hebt voor innovatieve ChatGPT-projecten in het onderwijs. Van simpele chatbots tot complexe multi-modal AI applicaties - dit is je startpunt!
 
 ## ✨ Complete Feature Set
 
 ### 🎯 **Core AI Functionaliteiten**
-- 🧠 **Multi-Model AI**: Gemini 2.5 Pro, 2.5 Flash, en 2.0 Flash met internet toegang
-- 🌐 **Real-time Internet Access**: Gemini 2.0 Flash met Google Search integration
-- 🎵 **Audio Transcriptie**: Gemini 2.5 Flash voor speech-to-text
+- 🧠 **ChatGPT-4o**: Meest capabele OpenAI model voor alle taken
+- 🎵 **Audio Transcriptie**: OpenAI Whisper voor speech-to-text
 - 📸 **Multi-Image Analysis**: Meerdere afbeeldingen tegelijk analyseren
 - 💬 **Markdown Rendering**: Perfecte opmaak van AI responses
 - 🗣️ **Spraakherkenning**: Browser native voice input
 - ⚡ **Streaming Responses**: Real-time AI response weergave
 
 ### 🔊 **Advanced Text-to-Speech (TTS)**
-- 🎙️ **Dual TTS Engines**: Microsoft TTS (standaard) + Gemini AI TTS
-- 🎭 **30 Gemini Voices**: Van Zephyr tot Sulafat met unieke karakteristieken
-- 😊 **7 Emotion Styles**: Neutraal, Gelukkig, Enthousiast, Kalm, Professioneel, Vriendelijk, Informatief
+- 🎙️ **Dual TTS Engines**: Microsoft TTS + OpenAI TTS
+- 🎭 **6 OpenAI Voices**: Alloy, Echo, Fable, Onyx, Nova, Shimmer
 - ⚡ **Speed Control**: 4 snelheden voor Microsoft TTS (0.75x tot 2.0x)
 - ⚙️ **Unified Settings**: Één settings dropdown voor alle TTS opties
 - 📱 **Responsive Interface**: Geoptimaliseerd voor alle schermformaten
@@ -60,9 +58,9 @@ Klik rechtsbovenin op 'Use this template', geef het een gepaste naam voor je pro
 Open [Bolt.new](https://bolt.new) en login. Selecteer 'import from github' en login op GitHub. Kies dan de 'repository' die je net hebt geforkt.
 
 ### Stap 3: 🔑 API Keys Verkrijgen
-**Vereist:** [Gemini API Key](https://makersuite.google.com/app/apikey) (gratis)
+**Vereist:** [OpenAI API Key](https://platform.openai.com/api-keys) (betaald)
 
-⚠️ **Kosten**: Gemini heeft een genereuze gratis tier voor alle functionaliteiten inclusief audio transcriptie.
+⚠️ **Kosten**: OpenAI API is betaald maar heeft een gratis trial credit. Monitor je usage!
 
 ### Stap 4: 🛠️ Project Setup
 ```bash
@@ -82,8 +80,8 @@ cp .env.example .env.local
 Maak `.env.local` aan met je API keys:
 
 ```env
-# VEREIST: Voor alle Gemini AI functionaliteiten (inclusief audio transcriptie)
-GEMINI_API_KEY=your_gemini_api_key_here
+# VEREIST: Voor alle OpenAI functionaliteiten (inclusief audio transcriptie)
+OPENAI_API_KEY=your_openai_api_key_here
 ```
 
 ### Stap 6: 🎉 Start & Test
@@ -96,17 +94,13 @@ npm run dev
 ### Stap 7: 🚀 Deploy naar Netlify
 1. **In Bolt.new**: "Deploy to Netlify"
 2. **Environment Variables toevoegen** in Netlify dashboard:
-   - `GEMINI_API_KEY` (vereist voor alle functionaliteiten)
+   - `OPENAI_API_KEY` (vereist voor alle functionaliteiten)
 3. **Deploy** en je app is live!
 
 ## 📋 Volledige Feature Demonstratie
 
-### 🎯 **AI Model Selector**
-```
-🧠 Gemini 2.5 Pro: Hoogste kwaliteit, diepgaande analyse
-⚡ Gemini 2.5 Flash: Beste balans snelheid & kwaliteit (standaard)
-🌐 Gemini 2.0 Flash: Internet toegang + Google Search (minder slim model)
-```
+### 🎯 **ChatGPT-4o Model**
+ChatGPT-4o kiest automatisch de beste aanpak voor je vraag, of het nu gaat om tekst, afbeeldingen, audio of complexe analyses.
 
 ### 🔊 **Text-to-Speech Demo**
 ```
@@ -123,24 +117,24 @@ npm run dev
 ✅ Upload 3 afbeeldingen + audio bestand + PDF document
 ✅ Selecteer welke bestanden je wilt analyseren  
 ✅ Vraag: "Vergelijk deze afbeeldingen met de audio transcriptie"
-✅ Gemini analyseert alles tegelijk en geeft uitgebreid antwoord
+✅ ChatGPT analyseert alles tegelijk en geeft uitgebreid antwoord
 ✅ Luister naar response met TTS + download als Word
 ```
 
 ### 📸 **Camera & Vision**
 - 📷 Direct foto's maken in de browser
 - 🖼️ Afbeelding preview met bewerking opties
-- 👁️ Gemini Vision voor object/tekst herkenning
+- 👁️ ChatGPT Vision voor object/tekst herkenning
 - 🔄 Multi-image comparison en analyse
 
 ### 🎵 **Audio Processing Pipeline**
 ```
-Audio Upload → Gemini Transcriptie → Gemini Analyse → Markdown Response → TTS Output
+Audio Upload → Whisper Transcriptie → ChatGPT Analyse → Markdown Response → TTS Output
 ```
 - Ondersteunt 6 audio formaten (MP3, WAV, AIFF, AAC, OGG, FLAC)
 - Nederlandse prompt voor optimale transcriptie
 - Tot 25MB bestanden (inline data limiet)
-- Perfecte transcriptie kwaliteit met Gemini 2.5 Flash
+- Perfecte transcriptie kwaliteit met OpenAI Whisper
 
 ### 📁 **Smart File Management**
 - **Visual File Manager**: Grid view met previews
@@ -184,9 +178,9 @@ Audio Upload → Gemini Transcriptie → Gemini Analyse → Markdown Response �
 
 | Endpoint | Functie | Input | Output |
 |----------|---------|-------|--------|
-| `/api/chat` | Gemini AI Conversatie | `message`, `images[]`, `aiModel` | AI Response |
-| `/api/chat-stream` | Streaming AI Response | `message`, `images[]`, `aiModel` | Server-Sent Events |
-| `/api/generate-tts` | Gemini TTS Audio | `text`, `voiceName`, `emotion` | WAV Audio |
+| `/api/chat` | ChatGPT AI Conversatie | `message`, `images[]` | AI Response |
+| `/api/chat-stream` | Streaming AI Response | `message`, `images[]` | Server-Sent Events |
+| `/api/generate-tts` | OpenAI TTS Audio | `text`, `voiceName` | MP3 Audio |
 | `/api/transcribe-audio` | Audio → Tekst | Audio File | Transcriptie |
 | `/api/upload-docx` | Document Processing | PDF/DOCX/CSV | Extracted Text |
 
@@ -194,8 +188,8 @@ Audio Upload → Gemini Transcriptie → Gemini Analyse → Markdown Response �
 
 | Category | Formats | Processing | Max Size |
 |----------|---------|------------|----------|
-| 📸 **Images** | JPG, PNG, GIF, WebP, BMP | Gemini Vision | 20MB |
-| 🎵 **Audio** | MP3, WAV, AIFF, AAC, OGG, FLAC | Gemini 2.5 Flash | 25MB |
+| 📸 **Images** | JPG, PNG, GIF, WebP, BMP | ChatGPT Vision | 20MB |
+| 🎵 **Audio** | MP3, WAV, AIFF, AAC, OGG, FLAC | OpenAI Whisper | 25MB |
 | 📄 **Documents** | PDF, DOCX, TXT, MD | Text Extraction | 10MB |
 | 📊 **Data** | CSV, JSON | Structure Parsing | 5MB |
 
@@ -211,12 +205,15 @@ Audio Upload → Gemini Transcriptie → Gemini Analyse → Markdown Response �
 }
 ```
 
-### 🤖 **Gemini Model Configuration**
+### 🤖 **ChatGPT Model Configuration**
 ```typescript
 // src/app/api/chat/route.ts
-const modelName = aiModel === 'pro' ? 'gemini-2.5-pro-preview-06-05' :
-                 aiModel === 'smart' ? 'gemini-2.5-flash-preview-05-20' :
-                 'gemini-2.0-flash-exp' // internet model
+const completion = await openai.chat.completions.create({
+  model: 'gpt-4o', // Most capable model
+  messages: messages,
+  max_tokens: 4000,
+  temperature: 0.7
+})
 ```
 
 ### 🔊 **TTS Engine Customization**
@@ -227,13 +224,15 @@ const [selectedGeminiVoice, setSelectedGeminiVoice] = useState(GEMINI_VOICES[3])
 const [selectedGeminiEmotion, setSelectedGeminiEmotion] = useState(EMOTION_STYLES[0]) // Neutraal
 ```
 
-### 🎵 **Gemini Audio Transcriptie Configuration**
+### 🎵 **OpenAI Whisper Transcriptie Configuration**
 ```typescript
 // src/app/api/transcribe-audio/route.ts
-const model = genAI.getGenerativeModel({ model: 'gemini-2.5-flash' })
-const prompt = "Transcribeer deze audio naar Nederlandse tekst. Geef alleen de getranscribeerde tekst terug, zonder extra commentaar."
-const result = await model.generateContent([prompt, audioPart])
-const transcription = result.response.text()
+const transcription = await openai.audio.transcriptions.create({
+  file: file,
+  model: 'whisper-1',
+  language: 'nl',
+  response_format: 'text'
+})
 ```
 
 ## 🌐 Production Deployment
@@ -265,7 +264,6 @@ vercel --prod
 
 ### 🔧 **Environment Variables (Production)**
 ```
-GEMINI_API_KEY=gai_xxxxxxxxxxxxx     # Google AI Studio
 OPENAI_API_KEY=sk-proj-xxxxxxxxxx    # OpenAI Platform
 NODE_ENV=production                   # Auto-set door Netlify
 ```
@@ -275,7 +273,7 @@ NODE_ENV=production                   # Auto-set door Netlify
 ### ❌ **Build Failures**
 | Error | Oorzaak | Oplossing |
 |-------|---------|-----------|
-| `GEMINI_API_KEY not found` | Missing env var | Check Netlify environment variables |
+| `OPENAI_API_KEY not found` | Missing env var | Check Netlify environment variables |
 | `Module not found: openai` | Missing dependency | Run `npm install` |
 | `Build command failed` | Wrong build settings | Set build command to `npm run build` |
 | `Hydration mismatch` | SSR/Client mismatch | Clear `.next` cache, restart dev server |
@@ -283,7 +281,7 @@ NODE_ENV=production                   # Auto-set door Netlify
 ### 🔧 **API Issues**
 | Problem | Solution |
 |---------|----------|
-| Gemini 429 Error | Check API quota/billing |
+| OpenAI 429 Error | Check API quota/billing |
 | Whisper fails | Verify audio format & size |
 | Upload timeout | Reduce file size < 25MB |
 | CORS errors | Check API route configuration |
@@ -310,8 +308,7 @@ NODE_ENV=production                   # Auto-set door Netlify
 ### 🏫 **Institutionele Deployment**
 ```bash
 # Multi-tenant setup
-GEMINI_API_KEY=shared_institutional_key
-OPENAI_API_KEY=shared_whisper_key
+OPENAI_API_KEY=shared_institutional_key
 STUDENT_MODE=true                    # Simplified interface
 ADMIN_DASHBOARD=true                # Usage analytics
 ```
@@ -362,14 +359,14 @@ Found een issue? [Open een GitHub Issue](https://github.com/TomNaberink/template
 ## 📚 Resources & Links
 
 ### 🔗 **API Documentation**
-- [Gemini API Docs](https://ai.google.dev/docs) - Google AI ontwikkelaar resources
+- [OpenAI API Docs](https://platform.openai.com/docs) - OpenAI ontwikkelaar resources
 - [OpenAI Whisper](https://platform.openai.com/docs/guides/speech-to-text) - Audio transcriptie
 - [Next.js 15](https://nextjs.org/docs) - Framework documentatie
 
 ### 🎥 **Video Tutorials**
-- [Gemini API Setup](https://makersuite.google.com/app/apikey) - API key verkrijgen
+- [OpenAI API Setup](https://platform.openai.com/api-keys) - API key verkrijgen
 - [Netlify Deployment](https://netlify.com) - Hosting platform
-- [OpenAI Platform](https://platform.openai.com) - Whisper API setup
+- [OpenAI Platform](https://platform.openai.com) - API setup
 
 ### 💡 **Community**
 - [GitHub Repository](https://github.com/TomNaberink/templateAPIinclcamera)
@@ -382,10 +379,10 @@ Found een issue? [Open een GitHub Issue](https://github.com/TomNaberink/template
 
 Deze template geeft je **alles** wat je nodig hebt om geavanceerde AI-applicaties te bouwen voor het onderwijs. Van simpele chatbots tot complexe multi-modal AI-assistenten - de mogelijkheden zijn eindeloos!
 
-**💜 Gemaakt met passie door Tom Naberink**  
+**💜 Gemaakt met passie door Tom Naberink**
 **🚀 Deploy nu en start met bouwen aan de toekomst van onderwijs!**
 
 ---
 
-*Versie 1.0 - Complete AI Education Template*  
+*Versie 2.0 - Complete ChatGPT Education Template*
 *Last updated: Juni 2025* 

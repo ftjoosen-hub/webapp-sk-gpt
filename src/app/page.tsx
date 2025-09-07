@@ -15,11 +15,11 @@ export default function Home() {
           </div>
           
           <h1 className="text-5xl font-bold text-gray-800 mb-4">
-            Vibe Coding Template
+            ChatGPT AI Template
           </h1>
           
           <p className="text-xl text-purple-700 font-medium mb-6">
-            Dit is een template om met Bolt te werken waarbij we gebruik maken van Gemini. Dit template is gemaakt door Tom Naberink
+            Dit is een template om met Bolt te werken waarbij we gebruik maken van OpenAI ChatGPT. Dit template is gemaakt door Tom Naberink
           </p>
 
           {/* AI voor Docenten Logo */}
@@ -56,7 +56,7 @@ export default function Home() {
                   Stap 1: Fork dit template in GitHub
                 </h3>
                 <p className="text-gray-600 mb-3">
-                  Ga naar <a href="https://github.com" target="_blank" className="text-purple-600 hover:text-purple-800 underline">github.com</a> en login in. Ga dan naar deze pagina: <a href="https://github.com/TomNaberink/apitemplateTom" target="_blank" className="text-purple-600 hover:text-purple-800 underline">https://github.com/TomNaberink/apitemplateTom</a>
+                  Ga naar <a href="https://github.com" target="_blank" className="text-purple-600 hover:text-purple-800 underline">github.com</a> en login in. Ga dan naar deze pagina: <a href="https://github.com/TomNaberink/apitemplateTom" target=\"_blank" className="text-purple-600 hover:text-purple-800 underline">https://github.com/TomNaberink/apitemplateTom</a>
                 </p>
                 <p className="text-gray-600 mb-3">
                   Klik rechtsbovenin op '<strong>Use this template</strong>', geef het een gepaste naam voor je project en klik op '<strong>create fork</strong>'.
@@ -95,12 +95,12 @@ export default function Home() {
                 <div className="bg-gray-900 text-green-400 p-4 rounded-lg font-mono text-sm">
                   <div className="flex items-center justify-end mb-2">
                     <CopyButton 
-                      text="GEMINI_API_KEY=your_actual_api_key_here"
+                      text="OPENAI_API_KEY=your_actual_api_key_here"
                       className="text-purple-400 hover:text-purple-300 text-xs transition-colors"
                       title="Kopieer .env.local inhoud"
                     />
                   </div>
-                  <code>GEMINI_API_KEY=your_actual_api_key_here</code>
+                  <code>OPENAI_API_KEY=your_actual_api_key_here</code>
                 </div>
                 <p className="text-orange-600 text-sm mt-2 font-medium">
                   ⚠️ Vervang "your_actual_api_key_here" met je echte API key! (zie stap 3)
@@ -110,13 +110,13 @@ export default function Home() {
               {/* Step 4 - Get API Key */}
               <div className="border-l-4 border-purple-500 pl-6">
                 <h3 className="text-lg font-semibold text-gray-800 mb-2">
-                  Stap 4: Verkrijg een Gemini API Key
+                  Stap 4: Verkrijg een OpenAI API Key
                 </h3>
                 <p className="text-gray-600 mb-3">
-                  Ga naar Google AI Studio om je gratis API key aan te maken:
+                  Ga naar OpenAI Platform om je API key aan te maken:
                 </p>
                 <a 
-                  href="https://makersuite.google.com/app/apikey" 
+                  href="https://platform.openai.com/api-keys" 
                   target="_blank"
                   className="inline-flex items-center px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors"
                 >
@@ -128,7 +128,7 @@ export default function Home() {
                 
                 <div className="mt-4 p-4 bg-orange-50 border border-orange-200 rounded-lg">
                   <p className="text-orange-800 text-sm">
-                    ⚠️ <strong>Let op</strong>, je kunt gratis en risicovrij oefenen met de Gemini API. Daarnaast kun je 300,- dollar gratis budget krijgen. Als dat op, dan moet je het koppelen aan je creditcard. Zorg ervoor dat je weet wat je doet op dat moment!
+                    ⚠️ <strong>Let op</strong>, OpenAI API is niet gratis maar heeft wel een gratis trial credit. Je moet een creditcard koppelen. Zorg ervoor dat je weet wat je doet en monitor je usage!
                   </p>
                 </div>
               </div>
@@ -164,7 +164,7 @@ export default function Home() {
                     ⚙️ <strong>Environment Variables instellen:</strong>
                   </p>
                   <ul className="text-yellow-700 text-sm space-y-1">
-                    <li>• Bij <strong>'Key'</strong> vul je <code className="bg-yellow-100 px-1 rounded">GEMINI_API_KEY</code> in</li>
+                    <li>• Bij <strong>'Key'</strong> vul je <code className="bg-yellow-100 px-1 rounded">OPENAI_API_KEY</code> in</li>
                     <li>• Bij <strong>'Value'</strong> vul je je echte API key in</li>
                     <li>• Klik dan pas op <strong>'Deploy'</strong></li>
                   </ul>
@@ -196,7 +196,7 @@ export default function Home() {
               <span>💜</span>
             </div>
             <p className="text-gray-500 text-sm mt-2">
-              Vibe Coding Template door Tom Naberink • Powered by Bolt, Next.js & Gemini AI
+              ChatGPT AI Template door Tom Naberink • Powered by Bolt, Next.js & OpenAI
             </p>
           </div>
         </div>
